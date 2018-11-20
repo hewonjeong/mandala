@@ -1,8 +1,14 @@
-.title {
-  box-sizing: border-box;
-  border: 1px solid black;
+.wrap {
   display: flex;
+  flex-wrap: wrap;
   width: 33%;
-  justify-content: center;
-  align-items: center;
+
+  .title {
+    box-sizing: border-box;
+    border: 1px solid black;
+    display: flex;
+    width: 33%;
+    justify-content: center;
+    align-items: center;
+  }
 }
