@@ -1,14 +1,21 @@
-import React, { Component } from 'react';
-import Block from '../../types/Block';
+import React, { Component } from 'react'
+import BlockClass from '../../types/Block'
+import Block from '../Block'
+import style from './App.module.scss'
 
 interface Props {
-  block: Block;
+  block: BlockClass
+  onClickBlock: (newBlock: BlockClass) => void
 }
 
 class App extends Component<Props> {
   render() {
-    return <div className="App">Let's make mandala art planner🕺🏻</div>;
+    return (
+      <div className={style.App}>
+        <Block block={this.props.block} onClick={this.props.onClickBlock} />
+      </div>
+    )
   }
 }
 
-export default App;
+export default App
