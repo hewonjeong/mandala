@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import BlockClass from '../../types/Block'
-import Block from '../Block'
+import BlockClass, { BlockWithIsEditing } from '../../types/Block'
+import Block, { Props as BlockProps } from '../Block/Block'
 import style from './App.module.scss'
 import 'normalize.css'
 
 interface Props {
-  block: BlockClass
+  block: BlockWithIsEditing
   onClickBlock: (newBlock: BlockClass) => void
 }
 

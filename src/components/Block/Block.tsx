@@ -1,31 +1,55 @@
 import React, { Component } from 'react'
-import BlockClass from '../../types/Block'
+import BlockClass, { BlockWithIsEditing } from '../../types/Block'
 import style from './Block.module.scss'
 
-interface Props {
-  block: BlockClass
+export interface Props {
+  block: BlockWithIsEditing
+  onClick: (block: BlockClass) => void
 }
-
 class Block extends Component<Props, {}> {
+  state = {
+    isEditing: false,
+  }
   renderBlock = (block?: BlockClass) => {
     return block && <div className={style.title}>{block.title}</div>
   }
-  render() {
+
+  toggle = () => {
+    console.log('toggle')
+    //this.setState(({ isEditing }) => ({ isEditing: !isEditing }))
+  }
+
+  renderLeaf = () => {
     const { block } = this.props
+    //console.log('renderLeaf', block.title, this.state.isEditing)
+    return (
+      <div className={style.title} onClick={this.toggle}>
+        {this.state.isEditing ? (
+          <input className={style.input} placeholder={block.title} autoFocus />
+        ) : (
+          block.title
+        )}
+      </div>
+    )
+  }
+  onClickChild = (block: BlockClass) => {}
+
+  render() {
+    const { block, onClick } = this.props
     return block.children ? (
       <div className={style.wrap}>
-        <Block block={block.children[0]} />
-        <Block block={block.children[1]} />
-        <Block block={block.children[2]} />
-        <Block block={block.children[3]} />
-        <div className={style.title}>{block.title}</div>
-        <Block block={block.children[4]} />
-        <Block block={block.children[5]} />
-        <Block block={block.children[6]} />
-        <Block block={block.children[7]} />
+        <Block block={block.children[0]} onClick={onClick} />
+        <Block block={block.children[1]} onClick={onClick} />
+        <Block block={block.children[2]} onClick={onClick} />
+        <Block block={block.children[3]} onClick={onClick} />
+        {this.renderLeaf()}
+        <Block block={block.children[4]} onClick={onClick} />
+        <Block block={block.children[5]} onClick={onClick} />
+        <Block block={block.children[6]} onClick={onClick} />
+        <Block block={block.children[7]} onClick={onClick} />
       </div>
     ) : (
-      <div className={style.title}>{block.title}</div>
+      this.renderLeaf()
     )
   }
 }
