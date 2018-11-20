@@ -1,9 +1,6 @@
-export default class Block {
-  title: string;
-  children?: Block[];
+import { FixedSizeArray } from './utils'
 
-  constructor(title: string, children?: Block[]) {
-    this.title = title;
-    this.children = children;
-  }
+export default interface Block {
+  title: string
+  children: [Block?, Block?, Block?, Block?, Block?, Block?, Block?, Block?]
 }

@@ -1,54 +1,41 @@
-import Block from '../types/Block';
+import Block from '../types/Block'
 
-const block = new Block('main title here', [
-  new Block('0️⃣', [
-    new Block('0'),
-    new Block('1'),
-    new Block('2'),
-    new Block('3'),
-  ]),
-  new Block('1️⃣', [
-    new Block('0'),
-    new Block('1'),
-    new Block('2'),
-    new Block('3'),
-  ]),
-  new Block('2️⃣', [
-    new Block('0'),
-    new Block('1'),
-    new Block('2'),
-    new Block('3'),
-  ]),
-  new Block('3️⃣', [
-    new Block('0'),
-    new Block('1'),
-    new Block('2'),
-    new Block('3'),
-  ]),
-  new Block('4️⃣', [
-    new Block('0'),
-    new Block('1'),
-    new Block('2'),
-    new Block('3'),
-  ]),
-  new Block('5️⃣', [
-    new Block('0'),
-    new Block('1'),
-    new Block('2'),
-    new Block('3'),
-  ]),
-  new Block('6️⃣', [
-    new Block('0'),
-    new Block('1'),
-    new Block('2'),
-    new Block('3'),
-  ]),
-  new Block('7️⃣', [
-    new Block('0'),
-    new Block('1'),
-    new Block('2'),
-    new Block('3'),
-  ]),
-]);
+const block: Block = {
+  title: 'main title',
+  children: [
+    {
+      title: '0️⃣',
+      children: [],
+    },
+    {
+      title: '1️⃣',
+      children: [],
+    },
+    {
+      title: '2️⃣',
+      children: [],
+    },
+    {
+      title: '3️⃣',
+      children: [],
+    },
+    {
+      title: '4️⃣',
+      children: [],
+    },
+    {
+      title: '5️⃣',
+      children: [],
+    },
+    {
+      title: '6️⃣',
+      children: [],
+    },
+    {
+      title: '7️⃣',
+      children: [],
+    },
+  ],
+}
 
-export default block;
+export default block
