@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import BlockClass from '../../types/Block'
 import Block from '../Block'
 import style from './App.module.scss'
+import 'normalize.css'
 
 interface Props {
   block: BlockClass
