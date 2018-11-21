@@ -13,7 +13,11 @@ class App extends Component<Props> {
   render() {
     return (
       <div className={style.App}>
-        <Block block={this.props.block} onClick={this.props.onClickBlock} />
+        <Block
+          root={true}
+          block={this.props.block}
+          onClick={this.props.onClickBlock}
+        />
       </div>
     )
   }
