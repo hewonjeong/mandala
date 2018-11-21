@@ -7,14 +7,18 @@ interface Props {}
 
 interface State {
   block?: BlockWithIsEditing
+  selected: number[]
 }
 
 export default class AppContainer extends Component<Props, State> {
-  state: State = {}
+  state: State = {
+    selected: [],
+  }
   componentDidMount() {
     this.setState({ block: this.initIsEditing(this.loadBlock()) })
   }
 
+  setSelected = (selected: number[]) => this.setState({ selected })
   loadBlock = () => block
 
   initIsEditing = (block: BlockClass): BlockWithIsEditing => {
@@ -31,10 +35,6 @@ export default class AppContainer extends Component<Props, State> {
     }
   }
 
-  /*  onClickBlock = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log(e.target)
-  } */
-
   onClickBlock = (newBlock: BlockClass) => {
     console.log(newBlock)
     //this.setState({ newBlock })
@@ -43,7 +43,11 @@ export default class AppContainer extends Component<Props, State> {
   render() {
     const { block } = this.state
     return block ? (
-      <App block={block} onClickBlock={this.onClickBlock} />
+      <App
+        block={block}
+        onClickBlock={this.onClickBlock}
+        onSelect={this.setSelected}
+      />
     ) : (
       <div>Let's make mandala art planner🕺🏻</div>
     )

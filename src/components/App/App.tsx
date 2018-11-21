@@ -7,6 +7,7 @@ import 'normalize.css'
 interface Props {
   block: BlockWithIsEditing
   onClickBlock: (newBlock: BlockClass) => void
+  onSelect: (selected: number[]) => void
 }
 
 class App extends Component<Props> {
@@ -17,6 +18,8 @@ class App extends Component<Props> {
           root={true}
           block={this.props.block}
           onClick={this.props.onClickBlock}
+          onSelect={this.props.onSelect}
+          path={[]}
         />
       </div>
     )

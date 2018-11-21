@@ -5,8 +5,12 @@ import style from './Block.module.scss'
 export interface Props {
   block: BlockWithIsEditing
   root?: boolean
+  path: number[]
   onClick: (block: BlockClass) => void
+  onSelect: (selected: number[]) => void
 }
+
+/* TODO: Block Cont */
 class Block extends Component<Props, {}> {
   static defaultProps = {
     root: false,
@@ -15,7 +19,8 @@ class Block extends Component<Props, {}> {
     isEditing: false,
   }
   onClickLeaf = () => {
-    console.log('toggle', this.props.block)
+    console.log('onClickLeaf', this.props.path)
+    this.props.onSelect([])
   }
 
   onClick = (child: BlockWithIsEditing) => {
@@ -24,7 +29,11 @@ class Block extends Component<Props, {}> {
 
   renderLeaf = (title: string) => {
     return (
-      <div className={style.title} onClick={this.onClickLeaf}>
+      <div
+        key={this.props.path.join('/')}
+        className={style.title}
+        onClick={this.onClickLeaf}
+      >
         {this.state.isEditing ? (
           <input className={style.input} placeholder={title} autoFocus />
         ) : (
@@ -46,21 +55,38 @@ class Block extends Component<Props, {}> {
   }
 
   /* recurssive */
-  renderBlock = (child: BlockWithIsEditing) => (
-    <Block block={child} onClick={this.props.onClick} />
-  )
+  renderBlock = (child: BlockWithIsEditing, i: number) => {
+    const onSelect = (selected: number[]) =>
+      this.props.onSelect([i, ...selected])
+    const paht = [...this.props.path, i]
+    return (
+      <Block
+        block={child}
+        path={paht}
+        onClick={this.props.onClick}
+        onSelect={onSelect}
+        key={paht.join('/')}
+      />
+    )
+  }
 
   renderBlocks = (
     children: BlockWithIsEditing[],
     title: string,
     root: boolean = this.props.root as boolean
   ) => {
+    const childrenBlocks = children.map(this.renderBlock)
     const blocks = [
-      children.slice(0, 4).map(this.renderBlock),
+      childrenBlocks.slice(0, 4),
       root ? this.renderRoot() : this.renderLeaf(title),
-      children.slice(4, 8).map(this.renderBlock),
+      childrenBlocks.slice(4, 8),
     ]
-    return <div className={style.wrap}>{blocks}</div>
+    const key = this.props.path.join('/')
+    return (
+      <div key={key} className={style.wrap}>
+        {blocks}
+      </div>
+    )
   }
 
   render() {
